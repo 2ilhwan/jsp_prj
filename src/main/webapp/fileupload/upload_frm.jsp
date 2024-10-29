@@ -3,6 +3,10 @@
     info=""
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	// 이동한 페이지에서 새로고침 했을 때 작업이 여러번 발생하지 않도록 하기 위한 flag 값 저장
+	session.setAttribute("uploadFlag", false);
+%>
 <!DOCTYPE html>
 <html>
 <head>

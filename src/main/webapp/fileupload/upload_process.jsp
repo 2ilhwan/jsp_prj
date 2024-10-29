@@ -27,7 +27,7 @@ href="http://192.168.10.223/jsp_prj/common/CSS/main_20240911.css">
 <script type="text/javascript">
 $(function(){
    
-} );//ready
+});//ready
 </script>
 </head>
 <body>
@@ -38,6 +38,11 @@ web parameter가 전달되지 않는다.
 EL: ${param.uploader}<br> --%>
 요청방식: <%= request.getMethod() %><br>
 <%
+//flag 받기
+boolean uploadFlag=(boolean)(session.getAttribute("uploadFlag"));
+
+if(!uploadFlag){
+	
 //1. 업로드 된 파일의 저장 디렉토리를 얻기
 File saveDir=new File("C:/dev/workspace/jsp_prj/src/main/webapp/upload");
 
@@ -88,7 +93,6 @@ if(uploadFile.length() > maxSize){//업로드 최대 크기 10Mbyte 초과
 원본 파일명: <%= originName %><br>
 변경 파일명: <%= fileSysName%><br>
 <%-- <img src="http://localhost/jsp_prj/upload/<%=fileSysName%>"/> 이클립스여서 안됨, 서버 세팅하면 됨--%>
-<a href="file_list.jsp">파일 리스트 보기</a>
 </div>
 <%
 }//end else
@@ -98,7 +102,11 @@ if(uploadFile.length() > maxSize){//업로드 최대 크기 10Mbyte 초과
 	파일 업로드 실패
 	<%
 }//end catch
+
+session.setAttribute("uploadFlag", true);
+}//end if
 %>
+<a href="file_list.jsp">파일 리스트 보기</a>
 
 
 </div>
